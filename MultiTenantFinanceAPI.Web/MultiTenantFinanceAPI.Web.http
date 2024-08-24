@@ -1,0 +1,6 @@
+@MultiTenantFinanceAPI.Web_HostAddress = http://localhost:5263
+
+GET {{MultiTenantFinanceAPI.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
