@@ -43,6 +43,16 @@ builder.Services.AddScoped<ITenantProvider, TenantProvider>();
 builder.Services.AddScoped<IPartnerRepository, PartnerRepository>();
 builder.Services.AddScoped<IPartnerService, PartnerService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -116,6 +126,7 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseMiddleware<ExceptionMiddleware>();
+app.UseCors("AllowAllOrigins");
 
 
 app.UseHttpsRedirection();
