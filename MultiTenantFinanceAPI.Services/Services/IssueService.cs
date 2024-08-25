@@ -113,7 +113,6 @@ namespace MultiTenantFinanceAPI.Services.Services
             }
         }
 
-
         public async Task UpdateIssueAsync(int id, UpdateIssueDto issueDto)
         {
             var existingIssue = await _issueRepository.GetByIdAsync(id);

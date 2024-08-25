@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -10,7 +9,6 @@ using MultiTenantFinanceAPI.Data.Context;
 using MultiTenantFinanceAPI.Data.Repositories;
 using MultiTenantFinanceAPI.Services.Profiles;
 using MultiTenantFinanceAPI.Services.Services;
-using MultiTenantFinanceAPI.Web.Middlewares;
 using MultiTenantFinanceAPI.Web.Providers;
 using System.Text;
 

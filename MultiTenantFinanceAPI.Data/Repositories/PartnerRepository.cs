@@ -6,7 +6,6 @@ using MultiTenantFinanceAPI.Data.Context;
 public class PartnerRepository : IPartnerRepository
 {
     private readonly AppDbContext _context;
-
     public PartnerRepository(AppDbContext context)
     {
         _context = context;

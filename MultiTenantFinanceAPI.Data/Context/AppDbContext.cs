@@ -138,7 +138,6 @@ namespace MultiTenantFinanceAPI.Data.Context
                 }
             );
 
-
             modelBuilder.Entity<Issue>().HasData(
                 new Issue
                 {
@@ -238,5 +237,4 @@ namespace MultiTenantFinanceAPI.Data.Context
                 .OnDelete(DeleteBehavior.Restrict);  
         }
     }
-
 }

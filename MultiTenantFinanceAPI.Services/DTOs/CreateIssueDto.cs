@@ -2,7 +2,6 @@
 
 namespace MultiTenantFinanceAPI.Services.DTOs
 {
-
     public class CreateIssueDto
     {
         [Required(ErrorMessage = "Title is required")]

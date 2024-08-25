@@ -18,6 +18,7 @@ namespace MultiTenantFinanceAPI.Services.Profiles
             CreateMap<Agreement, AgreementDto>()
               .ForMember(dest => dest.PartnerName, opt => opt.MapFrom(src => src.Partner.Name))
               .ForMember(dest => dest.Issues, opt => opt.MapFrom(src => src.Issues));
+
             CreateMap<CreateAgreementDto, Agreement>();
             CreateMap<UpdateAgreementDto, Agreement>();
 

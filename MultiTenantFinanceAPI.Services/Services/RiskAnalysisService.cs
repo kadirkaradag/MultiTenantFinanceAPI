@@ -1,5 +1,4 @@
 ﻿using MultiTenantFinanceAPI.Core.Entities;
-using MultiTenantFinanceAPI.Core.Interfaces;
 using MultiTenantFinanceAPI.Services.DTOs;
 
 namespace MultiTenantFinanceAPI.Services.Services

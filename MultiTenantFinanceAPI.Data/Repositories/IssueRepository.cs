@@ -39,7 +39,6 @@ namespace MultiTenantFinanceAPI.Data.Repositories
             _context.Issues.Update(issue);
             await _context.SaveChangesAsync();
         }
-
         public async Task DeleteAsync(int id)
         {
             var issue = await _context.Issues.FindAsync(id);

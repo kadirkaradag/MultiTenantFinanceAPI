@@ -1,5 +1,4 @@
 ﻿using MultiTenantFinanceAPI.Core.Entities.Enums;
-using System.Text.Json.Serialization;
 
 namespace MultiTenantFinanceAPI.Core.Entities
 {
@@ -18,7 +17,4 @@ namespace MultiTenantFinanceAPI.Core.Entities
         public int AgreementId { get; set; } 
         public Agreement Agreement { get; set; }
     }
-
-
-
 }

@@ -12,7 +12,6 @@ namespace MultiTenantFinanceAPI.Services.DTOs
         public decimal AgreementAmount { get; set; }
         public RiskLevel RiskLevel { get; set; }
         public decimal RiskAmount { get; set; }
-
         public int AgreementId { get; set; }  
         public string AgreementName { get; set; }  
     }

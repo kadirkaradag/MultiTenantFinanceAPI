@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace MultiTenantFinanceAPI.Core.Entities
+﻿namespace MultiTenantFinanceAPI.Core.Entities
 {
     public class Agreement
     {

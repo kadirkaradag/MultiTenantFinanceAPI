@@ -10,9 +10,6 @@
         public DateTime EndDate { get; set; }
         public int PartnerId { get; set; }
         public string PartnerName { get; set; }
-
         public List<IssueDto> Issues { get; set; }
     }
-
-
 }

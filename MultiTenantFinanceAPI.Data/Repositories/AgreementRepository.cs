@@ -2,11 +2,6 @@
 using MultiTenantFinanceAPI.Core.Entities;
 using MultiTenantFinanceAPI.Core.Interfaces;
 using MultiTenantFinanceAPI.Data.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MultiTenantFinanceAPI.Data.Repositories
 {

@@ -10,5 +10,4 @@ namespace MultiTenantFinanceAPI.Core.Interfaces
         Task UpdateAsync(Partner entity);
         Task DeleteAsync(Partner entity);
     }
-
 }

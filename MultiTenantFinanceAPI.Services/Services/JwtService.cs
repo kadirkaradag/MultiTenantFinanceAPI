@@ -28,12 +28,12 @@ namespace MultiTenantFinanceAPI.Services.Services
         public string GenerateToken(ApplicationUser user)
         {
             var claims = new List<Claim>
-    {
-        new Claim(JwtRegisteredClaimNames.Sub, user.Id),
-        new Claim(JwtRegisteredClaimNames.Email, user.Email),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        new Claim("TenantId", user.TenantId.ToString())
-    };
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("TenantId", user.TenantId.ToString())
+            };
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256);
 

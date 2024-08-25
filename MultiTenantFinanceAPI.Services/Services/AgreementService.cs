@@ -58,7 +58,6 @@ namespace MultiTenantFinanceAPI.Services.Services
             {
                 throw new KeyNotFoundException("Agreement not found");
             }
-
             await _agreementRepository.DeleteAsync(id);
         }
     }

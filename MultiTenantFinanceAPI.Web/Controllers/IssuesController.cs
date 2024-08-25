@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using MultiTenantFinanceAPI.Core.Entities;
 using MultiTenantFinanceAPI.Services.DTOs;
 using MultiTenantFinanceAPI.Services.Services;
 
