@@ -11,9 +11,11 @@ namespace MultiTenantFinanceAPI.Services.DTOs
         public decimal Cost { get; set; }
         public decimal AgreementAmount { get; set; }
         public RiskLevel RiskLevel { get; set; }
-        public int AgreementId { get; set; }
-        public string AgreementName { get; set; } // Agreement ile ilişkilendirilmiş bir alan
-        public int TenantId { get; set; } // İş ortağının kimliği
+        public decimal RiskAmount { get; set; }
+
+        public int AgreementId { get; set; }  // Agreement ID
+        public string AgreementName { get; set; }  // Agreement Name
     }
+
 
 }

@@ -8,12 +8,14 @@ namespace MultiTenantFinanceAPI.Core.Entities
         public string Name { get; set; }
         public decimal Amount { get; set; }
         public decimal Cost { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public int TenantId { get; set; }
 
-        public DateTime StartDate { get; set; } // Başlama Tarihi
-        public DateTime EndDate { get; set; } // Bitiş Tarihi
+        public int PartnerId { get; set; }  // Partner ile ilişki
+        public Partner Partner { get; set; }
 
-        [JsonIgnore] // Döngüsel referansları önlemek için
-        public ICollection<Issue> Issues { get; set; }
+        public ICollection<Issue> Issues { get; set; }  // Bir Agreement, birden fazla Issue ile ilişkili olabilir
     }
+
 }

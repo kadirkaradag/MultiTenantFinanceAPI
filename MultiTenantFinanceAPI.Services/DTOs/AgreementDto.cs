@@ -6,11 +6,13 @@
         public string Name { get; set; }
         public decimal Amount { get; set; }
         public decimal Cost { get; set; }
-        public int TenantId { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public int PartnerId { get; set; }
+        public string PartnerName { get; set; }
 
-        public DateTime StartDate { get; set; } // Başlama Tarihi
-        public DateTime EndDate { get; set; } // Bitiş Tarihi
-
-        public List<IssueDto> Issues { get; set; }
+        public List<IssueDto> Issues { get; set; }  // Issues alanını ekleyin
     }
+
+
 }

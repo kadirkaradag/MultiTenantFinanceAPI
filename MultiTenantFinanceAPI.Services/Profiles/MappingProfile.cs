@@ -16,7 +16,10 @@ namespace MultiTenantFinanceAPI.Services.Profiles
             CreateMap<CreateIssueDto, Issue>().ReverseMap();
             CreateMap<UpdateIssueDto, Issue>().ReverseMap();
 
-            CreateMap<Agreement, AgreementDto>();
+            CreateMap<Agreement, AgreementDto>()
+              .ForMember(dest => dest.PartnerName, opt => opt.MapFrom(src => src.Partner.Name))
+              .ForMember(dest => dest.Issues, opt => opt.MapFrom(src => src.Issues));  // Issues'u mapliyoruz
+
             CreateMap<CreateAgreementDto, Agreement>();
             CreateMap<UpdateAgreementDto, Agreement>();
 

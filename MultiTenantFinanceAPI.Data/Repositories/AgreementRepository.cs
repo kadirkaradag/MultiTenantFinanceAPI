@@ -21,12 +21,12 @@ namespace MultiTenantFinanceAPI.Data.Repositories
 
         public async Task<Agreement> GetByIdAsync(int id)
         {
-            return await _context.Agreements.Include(a => a.Issues).FirstOrDefaultAsync(a => a.Id == id);
+            return await _context.Agreements.Include(a => a.Issues).Include(a => a.Partner).FirstOrDefaultAsync(a => a.Id == id);
         }
 
         public async Task<IEnumerable<Agreement>> GetAllAsync()
         {
-            return await _context.Agreements.Include(a => a.Issues).ToListAsync();
+            return await _context.Agreements.Include(a => a.Issues).Include(a => a.Partner).ToListAsync();
         }
 
         public async Task AddAsync(Agreement agreement)

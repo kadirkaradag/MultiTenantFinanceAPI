@@ -33,7 +33,8 @@ namespace MultiTenantFinanceAPI.Data.Context
                     Cost = 5000m,
                     StartDate = new DateTime(2023, 1, 1),
                     EndDate = new DateTime(2023, 12, 31),
-                    TenantId = 1
+                    TenantId = 1,
+                    PartnerId = 1
                 },
                 new Agreement
                 {
@@ -43,7 +44,8 @@ namespace MultiTenantFinanceAPI.Data.Context
                     Cost = 7500m,
                     StartDate = new DateTime(2023, 2, 1),
                     EndDate = new DateTime(2023, 11, 30),
-                    TenantId = 2
+                    TenantId = 2,
+                    PartnerId = 1
                 },
                 new Agreement
                 {
@@ -53,7 +55,8 @@ namespace MultiTenantFinanceAPI.Data.Context
                     Cost = 10000m,
                     StartDate = new DateTime(2023, 3, 1),
                     EndDate = new DateTime(2023, 10, 31),
-                    TenantId = 1
+                    TenantId = 1,
+                    PartnerId = 1
                 },
                 new Agreement
                 {
@@ -63,7 +66,8 @@ namespace MultiTenantFinanceAPI.Data.Context
                     Cost = 12500m,
                     StartDate = new DateTime(2023, 4, 1),
                     EndDate = new DateTime(2023, 9, 30),
-                    TenantId = 2
+                    TenantId = 2,
+                    PartnerId = 1
                 },
                 new Agreement
                 {
@@ -73,7 +77,8 @@ namespace MultiTenantFinanceAPI.Data.Context
                     Cost = 15000m,
                     StartDate = new DateTime(2023, 5, 1),
                     EndDate = new DateTime(2023, 8, 31),
-                    TenantId = 1
+                    TenantId = 1,
+                    PartnerId = 1
                 },
                 new Agreement
                 {
@@ -83,7 +88,8 @@ namespace MultiTenantFinanceAPI.Data.Context
                     Cost = 17500m,
                     StartDate = new DateTime(2023, 6, 1),
                     EndDate = new DateTime(2023, 7, 31),
-                    TenantId = 2
+                    TenantId = 2,
+                    PartnerId = 1
                 }
             );
 
@@ -214,10 +220,22 @@ namespace MultiTenantFinanceAPI.Data.Context
                 }
             );
 
-            // Tenant-based filtering (seed işleminden sonra eklenir)
             modelBuilder.Entity<Agreement>().HasQueryFilter(a => a.TenantId == _tenantProvider.TenantId);
             modelBuilder.Entity<Partner>().HasQueryFilter(p => p.TenantId == _tenantProvider.TenantId);
             modelBuilder.Entity<Issue>().HasQueryFilter(i => i.TenantId == _tenantProvider.TenantId);
+
+            // Foreign Key Relationships with DeleteBehavior.Restrict or SetNull
+            modelBuilder.Entity<Agreement>()
+                .HasOne(a => a.Partner)
+                .WithMany(p => p.Agreements)
+                .HasForeignKey(a => a.PartnerId)
+                .OnDelete(DeleteBehavior.Restrict);  // Partner silinemez, Agreement'lar bağlı
+
+            modelBuilder.Entity<Issue>()
+                .HasOne(i => i.Agreement)
+                .WithMany(a => a.Issues)
+                .HasForeignKey(i => i.AgreementId)
+                .OnDelete(DeleteBehavior.Restrict);  // Agreement silinemez, Issue'lar bağlı
         }
     }
 

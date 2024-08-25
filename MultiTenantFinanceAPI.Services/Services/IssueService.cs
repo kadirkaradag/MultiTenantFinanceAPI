@@ -36,7 +36,6 @@ namespace MultiTenantFinanceAPI.Services.Services
                 RiskLevel = issue.RiskLevel,
                 AgreementId = issue.AgreementId,
                 AgreementName = issue.Agreement.Name,
-                TenantId = issue.TenantId
             }).ToList();
         }
         public async Task<Issue> GetByIdAsync(int id)
