@@ -12,10 +12,10 @@ namespace MultiTenantFinanceAPI.Core.Entities
         public DateTime EndDate { get; set; }
         public int TenantId { get; set; }
 
-        public int PartnerId { get; set; }  // Partner ile ilişki
+        public int PartnerId { get; set; }  
         public Partner Partner { get; set; }
 
-        public ICollection<Issue> Issues { get; set; }  // Bir Agreement, birden fazla Issue ile ilişkili olabilir
+        public ICollection<Issue> Issues { get; set; }  
     }
 
 }

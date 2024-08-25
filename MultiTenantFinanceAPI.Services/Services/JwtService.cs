@@ -32,7 +32,7 @@ namespace MultiTenantFinanceAPI.Services.Services
         new Claim(JwtRegisteredClaimNames.Sub, user.Id),
         new Claim(JwtRegisteredClaimNames.Email, user.Email),
         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        new Claim("TenantId", user.TenantId.ToString()) // TenantId claim'ini eklediğinizden emin olun
+        new Claim("TenantId", user.TenantId.ToString())
     };
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256);

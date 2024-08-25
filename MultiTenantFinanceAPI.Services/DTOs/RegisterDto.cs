@@ -10,6 +10,6 @@ namespace MultiTenantFinanceAPI.Services.DTOs
     {
         public string Email { get; set; }
         public string Password { get; set; }
-        public int TenantId { get; set; } // Kullanıcıya atanacak Tenant ID
+        public int TenantId { get; set; } 
     }
 }

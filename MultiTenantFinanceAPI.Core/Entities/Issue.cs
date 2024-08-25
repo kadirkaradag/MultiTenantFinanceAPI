@@ -15,7 +15,7 @@ namespace MultiTenantFinanceAPI.Core.Entities
         public decimal RiskAmount { get; set; }
         public int TenantId { get; set; }
 
-        public int AgreementId { get; set; }  // Agreement ile ilişki
+        public int AgreementId { get; set; } 
         public Agreement Agreement { get; set; }
     }
 

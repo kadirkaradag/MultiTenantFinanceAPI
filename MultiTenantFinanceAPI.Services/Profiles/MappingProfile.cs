@@ -8,7 +8,6 @@ namespace MultiTenantFinanceAPI.Services.Profiles
     {
         public MappingProfile()
         {
-            // Issue -> IssueDto haritalaması
             CreateMap<Issue, IssueDto>()
            .ForMember(dest => dest.AgreementName, opt => opt.MapFrom(src => src.Agreement.Name))
            .ReverseMap();
@@ -18,8 +17,7 @@ namespace MultiTenantFinanceAPI.Services.Profiles
 
             CreateMap<Agreement, AgreementDto>()
               .ForMember(dest => dest.PartnerName, opt => opt.MapFrom(src => src.Partner.Name))
-              .ForMember(dest => dest.Issues, opt => opt.MapFrom(src => src.Issues));  // Issues'u mapliyoruz
-
+              .ForMember(dest => dest.Issues, opt => opt.MapFrom(src => src.Issues));
             CreateMap<CreateAgreementDto, Agreement>();
             CreateMap<UpdateAgreementDto, Agreement>();
 

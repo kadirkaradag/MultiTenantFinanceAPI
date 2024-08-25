@@ -50,14 +50,12 @@ namespace MultiTenantFinanceAPI.Services.Services
 
         public async Task<Issue> CreateIssueAsync(CreateIssueDto issueDto)
         {
-            // İlgili anlaşmayı veritabanından getir
             var agreement = await _agreementRepository.GetByIdAsync(issueDto.AgreementId);
             if (agreement == null)
             {
                 throw new KeyNotFoundException("Agreement not found");
             }
 
-            // Yeni bir Issue nesnesi oluştur
             var issue = new Issue
             {
                 Title = issueDto.Title,
@@ -68,11 +66,9 @@ namespace MultiTenantFinanceAPI.Services.Services
                 AgreementAmount = issueDto.AgreementAmount,
             };
 
-            // Risk analizini gerçekleştir ve Issue'ya ata
             issue.RiskLevel = AnalyzeRisk(issue);
             issue.TenantId = _tenantProvider.TenantId;
 
-            // Issue'yu veritabanına kaydet
             await _issueRepository.AddAsync(issue);
             return issue;
         }

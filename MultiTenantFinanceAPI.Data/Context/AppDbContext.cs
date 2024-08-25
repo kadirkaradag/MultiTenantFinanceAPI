@@ -229,13 +229,13 @@ namespace MultiTenantFinanceAPI.Data.Context
                 .HasOne(a => a.Partner)
                 .WithMany(p => p.Agreements)
                 .HasForeignKey(a => a.PartnerId)
-                .OnDelete(DeleteBehavior.Restrict);  // Partner silinemez, Agreement'lar bağlı
+                .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<Issue>()
                 .HasOne(i => i.Agreement)
                 .WithMany(a => a.Issues)
                 .HasForeignKey(i => i.AgreementId)
-                .OnDelete(DeleteBehavior.Restrict);  // Agreement silinemez, Issue'lar bağlı
+                .OnDelete(DeleteBehavior.Restrict);  
         }
     }
 

@@ -36,7 +36,7 @@ namespace MultiTenantFinanceAPI.Web.Controllers
                 return NotFound();
             }
 
-            var issueDto = _mapper.Map<IssueDto>(issue); // Issue -> IssueDto dönüştürmesi
+            var issueDto = _mapper.Map<IssueDto>(issue);
             return Ok(issueDto);
         }
 

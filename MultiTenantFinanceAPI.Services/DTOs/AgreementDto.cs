@@ -11,7 +11,7 @@
         public int PartnerId { get; set; }
         public string PartnerName { get; set; }
 
-        public List<IssueDto> Issues { get; set; }  // Issues alanını ekleyin
+        public List<IssueDto> Issues { get; set; }
     }
 
 

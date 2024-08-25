@@ -13,7 +13,7 @@ namespace MultiTenantFinanceAPI.Services.DTOs
         public decimal Cost { get; set; }
         public int TenantId { get; set; }
 
-        public DateTime StartDate { get; set; } // Başlama Tarihi
-        public DateTime EndDate { get; set; } // Bitiş Tarihi
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }

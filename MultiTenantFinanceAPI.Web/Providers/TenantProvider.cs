@@ -20,7 +20,6 @@ namespace MultiTenantFinanceAPI.Web.Providers
 
                 if (tenantIdClaim == null)
                 {
-                    // Hata ayıklama için bir mesaj yazdırın
                     Console.WriteLine("TenantId claim not found.");
                 }
                 if (tenantIdClaim != null && int.TryParse(tenantIdClaim.Value, out var tenantId))

@@ -56,7 +56,6 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-// TenantProvider için HttpContextAccessor'ý eklemeyi unutmayýn
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddSwaggerGen(c =>
@@ -117,9 +116,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<AppDbContext>();
-    context.Database.Migrate(); // Gerekli migration'larý uygular
-
-    // Seed iþlemleri context.Database.Migrate()'den sonra otomatik olarak çalýþýr.
+    context.Database.Migrate(); 
 }
 
 // Configure the HTTP request pipeline.
@@ -134,7 +131,7 @@ app.UseCors("AllowAllOrigins");
 
 
 app.UseHttpsRedirection();
-app.UseAuthentication(); // JWT Authentication middleware'ini ekleyin
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
