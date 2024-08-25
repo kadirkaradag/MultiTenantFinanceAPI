@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MultiTenantFinanceAPI.Core.Entities;
+using MultiTenantFinanceAPI.Core.Entities.Enums;
 using MultiTenantFinanceAPI.Core.Interfaces;
 using MultiTenantFinanceAPI.Services.DTOs;
 using System;
@@ -26,7 +27,23 @@ namespace MultiTenantFinanceAPI.Services.Services
             _mapper = mapper;
             _tenantProvider = tenantProvider;
         }
-
+        public async Task<IEnumerable<IssueDto>> GetAllIssuesAsync()
+        {
+            var issues = await _issueRepository.GetAllAsync();
+            return issues.Select(issue => new IssueDto
+            {
+                Id = issue.Id,
+                Title = issue.Title,
+                Description = issue.Description,
+                Keywords = issue.Keywords,
+                Cost = issue.Cost,
+                AgreementAmount = issue.AgreementAmount,
+                RiskLevel = issue.RiskLevel,
+                AgreementId = issue.AgreementId,
+                AgreementName = issue.Agreement.Name,
+                TenantId = issue.TenantId
+            }).ToList();
+        }
         public async Task<Issue> GetByIdAsync(int id)
         {
             return await _issueRepository.GetByIdAsync(id);
@@ -39,23 +56,73 @@ namespace MultiTenantFinanceAPI.Services.Services
 
         public async Task<Issue> CreateIssueAsync(CreateIssueDto issueDto)
         {
+            // İlgili anlaşmayı veritabanından getir
             var agreement = await _agreementRepository.GetByIdAsync(issueDto.AgreementId);
             if (agreement == null)
             {
                 throw new KeyNotFoundException("Agreement not found");
             }
 
-            var issue = _mapper.Map<Issue>(issueDto);
-            issue.Agreement = agreement;
+            // Yeni bir Issue nesnesi oluştur
+            var issue = new Issue
+            {
+                Title = issueDto.Title,
+                Description = issueDto.Description,
+                AgreementId = issueDto.AgreementId,
+                Keywords = issueDto.Keywords,
+                Cost = issueDto.Cost,
+                AgreementAmount = issueDto.AgreementAmount,
+            };
 
-            var riskResult = _riskAnalysisService.AnalyzeRisk(issue);
-            issue.RiskAmount = riskResult.RiskAmount;
-
+            // Risk analizini gerçekleştir ve Issue'ya ata
+            issue.RiskLevel = AnalyzeRisk(issue);
             issue.TenantId = _tenantProvider.TenantId;
 
+            // Issue'yu veritabanına kaydet
             await _issueRepository.AddAsync(issue);
             return issue;
         }
+
+        public RiskLevel AnalyzeRisk(Issue issue)
+        {
+            // Basit bir risk analizi örneği
+            var riskScore = 0;
+
+            // Anahtar kelimeler üzerinden risk analizi
+            var keywords = issue.Keywords.Split(',');
+            foreach (var keyword in keywords)
+            {
+                if (keyword.Trim().ToLower() == "critical")
+                {
+                    riskScore += 5;
+                }
+                else if (keyword.Trim().ToLower() == "important")
+                {
+                    riskScore += 3;
+                }
+            }
+
+            // Maliyet ve anlaşma tutarına göre risk artırımı
+            if (issue.Cost > issue.AgreementAmount * 0.5m)
+            {
+                riskScore += 4;
+            }
+
+            // Risk seviyesini belirleme
+            if (riskScore >= 8)
+            {
+                return RiskLevel.High;
+            }
+            else if (riskScore >= 4)
+            {
+                return RiskLevel.Medium;
+            }
+            else
+            {
+                return RiskLevel.Low;
+            }
+        }
+
 
         public async Task UpdateIssueAsync(int id, UpdateIssueDto issueDto)
         {
@@ -73,11 +140,6 @@ namespace MultiTenantFinanceAPI.Services.Services
         public async Task DeleteIssueAsync(int id)
         {
             await _issueRepository.DeleteAsync(id);
-        }
-
-        public RiskResult AnalyzeRisk(Issue issue)
-        {
-            return _riskAnalysisService.AnalyzeRisk(issue);
-        }
+        }        
     }
 }

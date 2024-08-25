@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MultiTenantFinanceAPI.Core.Entities;
+using MultiTenantFinanceAPI.Core.Entities.Enums;
 using MultiTenantFinanceAPI.Core.Interfaces;
 
 namespace MultiTenantFinanceAPI.Data.Context
@@ -39,9 +40,31 @@ namespace MultiTenantFinanceAPI.Data.Context
     );
 
             modelBuilder.Entity<Issue>().HasData(
-                new Issue { Id = 1, Title = "Issue 1", Description = "Description for Issue 1", RiskAmount = 500, AgreementId = 1, TenantId = 1 },
-                new Issue { Id = 2, Title = "Issue 2", Description = "Description for Issue 2", RiskAmount = 700, AgreementId = 2, TenantId = 1 }
-            );
+          new Issue
+          {
+              Id = 1,
+              Title = "Issue 1",
+              Description = "Description 1",
+              RiskAmount = 500,
+              AgreementId = 1,
+              Keywords = "critical",
+              Cost = 3000,
+              AgreementAmount = 10000,
+              RiskLevel = RiskLevel.High
+          },
+          new Issue
+          {
+              Id = 2,
+              Title = "Issue 2",
+              Description = "Description 2",
+              RiskAmount = 300,
+              AgreementId = 2,
+              Keywords = "important",
+              Cost = 1000,
+              AgreementAmount = 20000,
+              RiskLevel = RiskLevel.Medium
+          }
+      );
         }
     }
 

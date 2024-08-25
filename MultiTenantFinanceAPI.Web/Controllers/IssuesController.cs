@@ -19,6 +19,13 @@ namespace MultiTenantFinanceAPI.Web.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllIssues()
+        {
+            var issues = await _issueService.GetAllAsync();
+            return Ok(issues);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetIssue(int id)
         {
@@ -35,20 +42,22 @@ namespace MultiTenantFinanceAPI.Web.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateIssue([FromBody] CreateIssueDto createIssueDto)
+        public async Task<IActionResult> CreateIssue([FromBody] CreateIssueDto issueDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            // Servis metoduna DTO'yu geçiyoruz
-            var createdIssue = await _issueService.CreateIssueAsync(createIssueDto);
-
-            // Oluşturulan Issue'yu IssueDto'ya dönüştürüyoruz
-            var issueDto = _mapper.Map<IssueDto>(createdIssue);
-
-            return CreatedAtAction(nameof(GetIssue), new { id = createdIssue.Id }, issueDto);
+            try
+            {
+                var issue = await _issueService.CreateIssueAsync(issueDto);
+                return Ok(new { RiskLevel = issue.RiskLevel });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPut("{id}")]
