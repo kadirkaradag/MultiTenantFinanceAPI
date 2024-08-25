@@ -12,8 +12,8 @@ using MultiTenantFinanceAPI.Data.Context;
 namespace MultiTenantFinanceAPI.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240824235712_UpdateIssueModel")]
-    partial class UpdateIssueModel
+    [Migration("20240825172112_test")]
+    partial class test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -172,9 +172,15 @@ namespace MultiTenantFinanceAPI.Data.Migrations
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("TenantId")
                         .HasColumnType("int");
@@ -188,17 +194,61 @@ namespace MultiTenantFinanceAPI.Data.Migrations
                         {
                             Id = 1,
                             Amount = 10000m,
-                            Cost = 8000m,
+                            Cost = 5000m,
+                            EndDate = new DateTime(2023, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Agreement 1",
+                            StartDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TenantId = 1
                         },
                         new
                         {
                             Id = 2,
                             Amount = 15000m,
-                            Cost = 12000m,
+                            Cost = 7500m,
+                            EndDate = new DateTime(2023, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Agreement 2",
+                            StartDate = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TenantId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Amount = 20000m,
+                            Cost = 10000m,
+                            EndDate = new DateTime(2023, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Agreement 3",
+                            StartDate = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TenantId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Amount = 25000m,
+                            Cost = 12500m,
+                            EndDate = new DateTime(2023, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Agreement 4",
+                            StartDate = new DateTime(2023, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TenantId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Amount = 30000m,
+                            Cost = 15000m,
+                            EndDate = new DateTime(2023, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Agreement 5",
+                            StartDate = new DateTime(2023, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Amount = 35000m,
+                            Cost = 17500m,
+                            EndDate = new DateTime(2023, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Agreement 6",
+                            StartDate = new DateTime(2023, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TenantId = 2
                         });
                 });
 
@@ -313,34 +363,6 @@ namespace MultiTenantFinanceAPI.Data.Migrations
                     b.HasIndex("AgreementId");
 
                     b.ToTable("Issues");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AgreementAmount = 10000m,
-                            AgreementId = 1,
-                            Cost = 3000m,
-                            Description = "Description 1",
-                            Keywords = "critical",
-                            RiskAmount = 500m,
-                            RiskLevel = 2,
-                            TenantId = 0,
-                            Title = "Issue 1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AgreementAmount = 20000m,
-                            AgreementId = 2,
-                            Cost = 1000m,
-                            Description = "Description 2",
-                            Keywords = "important",
-                            RiskAmount = 300m,
-                            RiskLevel = 1,
-                            TenantId = 0,
-                            Title = "Issue 2"
-                        });
                 });
 
             modelBuilder.Entity("MultiTenantFinanceAPI.Core.Entities.Partner", b =>
@@ -365,22 +387,6 @@ namespace MultiTenantFinanceAPI.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Partners");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ContactInfo = "partnera@example.com",
-                            Name = "Partner A",
-                            TenantId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ContactInfo = "partnerb@example.com",
-                            Name = "Partner B",
-                            TenantId = 1
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
