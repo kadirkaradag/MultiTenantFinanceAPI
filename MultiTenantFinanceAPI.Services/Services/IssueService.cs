@@ -131,8 +131,8 @@ namespace MultiTenantFinanceAPI.Services.Services
             {
                 throw new KeyNotFoundException("Issue not found");
             }
-
             var updatedIssue = _mapper.Map(issueDto, existingIssue);
+            updatedIssue.RiskLevel = AnalyzeRisk(updatedIssue);
 
             await _issueRepository.UpdateAsync(updatedIssue);
         }
